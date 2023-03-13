@@ -1,32 +1,26 @@
-import React, { useRef, useState } from 'react';
-import { Link , useNavigate} from 'react-router-dom';
-import styled from 'styled-components';
-import { useAuth } from '../contexts/AuthContext';
+import React, { useRef, useState } from 'react'
+import { Link, useNavigate} from 'react-router-dom';
+import styled from 'styled-components'
+import { useAuth } from '../contexts/AuthContext'
 
-export default function Signup() {
+export default function Login() {
 
     const emailRef = useRef();
     const passwordRef = useRef();
-    const confirmPasswordRef = useRef();
     const [error, setError]  = useState(true);
     const [loading, setLoading] = useState(false);
-    const { signUp } = useAuth();
+    const { logIn } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (passwordRef.current.value !== confirmPasswordRef.current.value){
-            setLoading(false);
-            return setError("Passwords do not match");
-        }   
         try {
             setError(false);
-            setLoading(true)
-            await signUp(emailRef.current.value, passwordRef.current.value);
+            setLoading(true);
+            await logIn(emailRef.current.value, passwordRef.current.value);
             navigate("/")
         } catch {
-            setError("Failed to create an account");
-            setLoading(false);
+            setError("Failed to sign in");
         }
         setLoading(false)
     }
@@ -34,17 +28,16 @@ export default function Signup() {
     return (
         <>
         <div>
-            <h1>Sign Up</h1>
+            <h1>Log In</h1>
             <Form onSubmit={handleSubmit}>
                 <input placeholder='Email' type='email' ref={emailRef} required></input>
                 <input placeholder='Password' type='password' ref={passwordRef} required></input>
-                <input placeholder='Confirm password' type='password' ref={confirmPasswordRef} required></input>
                 <button type='submit' disabled={loading}>Submit</button>
             </Form>
             {error && <ErrorMessage>{error}</ErrorMessage>}
         </div>
         <div>
-            Already have an account? <Link to="/login">Log In</Link>
+            Need an account? <Link to="/signup">Sign Up</Link> 
         </div>
         </>
   )
