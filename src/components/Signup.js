@@ -12,7 +12,7 @@ export default function Signup() {
     const confirmPasswordRef = useRef();
     const [error, setError]  = useState(true);
     const [loading, setLoading] = useState(false);
-    const { signUp, currentUser } = useAuth();
+    const { signUp, currentUser, changeDisplayName } = useAuth();
     const { introduceNewUser } = useDB();
     const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ export default function Signup() {
             setError(false);
             setLoading(true)
             await signUp(emailRef.current.value, passwordRef.current.value);
+            await changeDisplayName(usernameRef.current.value);
             await introduceNewUser(currentUser.uid, usernameRef.current.value);
             navigate("/")
         } catch {
@@ -40,7 +41,7 @@ export default function Signup() {
         <div>
             <h1>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
-                <input placeholder='Username' type="text" ref={usernameRef}></input>
+                <input placeholder='Username' type="text" ref={usernameRef} required></input>
                 <input placeholder='Email' type='email' ref={emailRef} required></input>
                 <input placeholder='Password' type='password' ref={passwordRef} required></input>
                 <input placeholder='Confirm password' type='password' ref={confirmPasswordRef} required></input>
