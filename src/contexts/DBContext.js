@@ -1,7 +1,6 @@
 import { doc, setDoc } from "firebase/firestore";
-import { useContext, createContext, useState } from "react";
-import { Form } from "react-router-dom";
-import  {db}  from "../firebase";
+import { useContext, createContext } from "react";
+import  { db }  from "../firebase";
 
 const DBContext = createContext();
 
@@ -11,12 +10,12 @@ export function useDB(){
 
 export function DBProvider({children}) {
 
-    const introduceNewUser = (uid, displayName) => {
+    const introduceNewUser = (uid, displayName, firstName, lastName, description) => {
         return setDoc(doc(db, "users", uid), {
             displayName: displayName,
-            firstName: "",
-            lastName: "",
-            description: "",
+            firstName: firstName,
+            lastName: lastName,
+            description: description,
             private: false,
             following: [],
             followers: [],

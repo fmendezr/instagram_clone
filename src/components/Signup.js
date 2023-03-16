@@ -2,18 +2,15 @@ import React, { useRef, useState } from 'react';
 import { Link , useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuth } from '../contexts/AuthContext';
-import { useDB } from '../contexts/DBContext';
 
 export default function Signup() {
 
-    const usernameRef = useRef()
     const emailRef = useRef();
     const passwordRef = useRef();
     const confirmPasswordRef = useRef();
     const [error, setError]  = useState(true);
     const [loading, setLoading] = useState(false);
-    const { signUp, currentUser, changeDisplayName } = useAuth();
-    const { introduceNewUser } = useDB();
+    const { signUp } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -26,8 +23,6 @@ export default function Signup() {
             setError(false);
             setLoading(true)
             await signUp(emailRef.current.value, passwordRef.current.value);
-            await changeDisplayName(usernameRef.current.value);
-            await introduceNewUser(currentUser.uid, usernameRef.current.value);
             navigate("/")
         } catch {
             setError("Failed to create an account");
@@ -41,7 +36,6 @@ export default function Signup() {
         <div>
             <h1>Sign Up</h1>
             <Form onSubmit={handleSubmit}>
-                <input placeholder='Username' type="text" ref={usernameRef} required></input>
                 <input placeholder='Email' type='email' ref={emailRef} required></input>
                 <input placeholder='Password' type='password' ref={passwordRef} required></input>
                 <input placeholder='Confirm password' type='password' ref={confirmPasswordRef} required></input>
