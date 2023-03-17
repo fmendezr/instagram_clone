@@ -32,31 +32,74 @@ export default function Signup() {
     }
 
     return (
-        <>
-        <div>
-            <h1>Sign Up</h1>
+        <Main>
+        <Container>
+            <Title>Sign Up</Title>
             <Form onSubmit={handleSubmit}>
-                <input placeholder='Email' type='email' ref={emailRef} required></input>
-                <input placeholder='Password' type='password' ref={passwordRef} required></input>
-                <input placeholder='Confirm password' type='password' ref={confirmPasswordRef} required></input>
-                <button type='submit' disabled={loading}>Submit</button>
+                <Section>
+                    <Label>Email</Label>
+                    <Input placeholder='Email' type='email' ref={emailRef} required/>
+                </Section>
+                <Section>
+                    <Label>Password</Label>
+                    <Input placeholder='Password' type='password' ref={passwordRef} required />
+                </Section>
+                <Section>
+                    <Label>Confirm Password</Label>
+                    <Input placeholder='Confirm password' type='password' ref={confirmPasswordRef} required />
+                </Section>
+                <Button type='submit' disabled={loading}>Submit</Button>
             </Form>
             {error && <ErrorMessage>{error}</ErrorMessage>}
-        </div>
-        <div>
-            Already have an account? <Link to="/login">Log sIn</Link>
-        </div>
-        </>
+        </Container>
+        <Container>
+            Already have an account? <Link to="/login">Log In</Link>
+        </Container>
+        </Main>
   )
 }
 
-const Form  = styled.form`
+const Main = styled.main`
+Background: red;
+`
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    top: 50%:
+`
+
+const Title = styled.h1`
+    font-size: 2rem;
+`
+
+const Form = styled.form`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    max-width: 250px;
+    width:  90%;
+    max-width: 250px;;
+    padding: 1rem;
+    top: 50%;
+    left: 50%;
 `
 
-const ErrorMessage = styled.p`
-    color: red;
+const Section =   styled.section`
+    display: flex;
+    flex-direction: column;
+`
+
+const Label = styled.label`
+`
+
+const Input = styled.input`
+`
+
+const ErrorMessage  = styled.p`
+`
+
+const Button = styled.button`
 `
