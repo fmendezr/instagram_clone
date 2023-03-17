@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useAuth } from "../contexts/AuthContext";
 import { useDB } from "../contexts/DBContext";
 
-export default function ModifyProfile (props) {
+export default function CreateProfile (props) {
 
     const [username, setUsername] = useState("");
     const [firstName, setFirstName]  = useState("");

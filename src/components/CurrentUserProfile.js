@@ -4,8 +4,12 @@ import settingsLogo from "../images/settingsLogo.svg"
 
 
 export default function CurrentUserProfile () {
-    
+
     const {currentUser} = useAuth();
+
+    const handleEditClick = (e) => {
+        e.preventDefault();    
+    }
 
     return (
         <TopContainer>
@@ -13,7 +17,7 @@ export default function CurrentUserProfile () {
             <PersonalInformation>
                 <Row>
                     {currentUser.displayName}
-                    <Button>Edit Profile</Button>
+                    <Button type="button" onClick={handleEditClick}>Edit Profile</Button>
                     <Icon src={settingsLogo} alt="settings"/>
                 </Row>
                 <Row>

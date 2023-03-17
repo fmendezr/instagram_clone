@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import ModifyProfile from "./ModifyProfile";
+import CreateProfile from "./CreateProfile";
 
 export default function Home () {
 
@@ -25,7 +25,7 @@ export default function Home () {
             <Link to={`/${displayName}`}><button>Profile</button></Link>
             <p>{currentUser.uid}</p>
             <p>{currentUser.displayName}</p>
-            {  displayName === null ?  <ModifyProfile firstTime={true} changeState={changeDisplayName}/> :  null}
+            {  displayName === null ?  <CreateProfile firstTime={true} changeState={changeDisplayName}/> :  null}
         </>
     )
 } 
