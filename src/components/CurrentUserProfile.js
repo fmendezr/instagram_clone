@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth } from "../contexts/AuthContext";
 import settingsLogo from "../images/settingsLogo.svg"
@@ -7,18 +8,14 @@ export default function CurrentUserProfile () {
 
     const {currentUser} = useAuth();
 
-    const handleEditClick = (e) => {
-        e.preventDefault();    
-    }
-
     return (
         <TopContainer>
             <ImageContainer></ImageContainer>
             <PersonalInformation>
                 <Row>
                     {currentUser.displayName}
-                    <Button type="button" onClick={handleEditClick}>Edit Profile</Button>
-                    <Icon src={settingsLogo} alt="settings"/>
+                    <Link to={`/${currentUser.displayName}/settings`} state={{from: "profile"}}><Button type="button">Edit Profile</Button></Link>
+                    <Link to={`/${currentUser.displayName}/settings`} state={{from: "account"}}><Icon src={settingsLogo} alt="settings"/></Link>
                 </Row>
                 <Row>
                     <p>Posts</p>

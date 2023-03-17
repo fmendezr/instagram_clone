@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { useContext, createContext } from "react";
 import  { db }  from "../firebase";
 
@@ -11,7 +11,8 @@ export function useDB(){
 export function DBProvider({children}) {
 
     const introduceNewUser = (uid, displayName, firstName, lastName, description) => {
-        return setDoc(doc(db, "users", uid), {
+        const docRef = doc(db, "users", uid);
+        return setDoc(docRef, {
             displayName: displayName,
             firstName: firstName,
             lastName: lastName,
@@ -24,8 +25,25 @@ export function DBProvider({children}) {
         });
     }
 
+    const getUserInfo = (uid) => {
+        const docRef = doc(db, "users", uid);
+        return getDoc(docRef);
+    }
+
+    const updateUserInfo = (uid, displayName, firstName, lastName, description ) => {
+        const docRef = doc(db, "users", uid);
+        return updateDoc(docRef, {
+            displayName,
+            firstName,
+            lastName,
+            description,
+        });
+    }
+
     const value = {
-        introduceNewUser
+        introduceNewUser,
+        getUserInfo,
+        updateUserInfo
     }
 
     return(

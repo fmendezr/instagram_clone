@@ -37,7 +37,7 @@ export default function CreateProfile (props) {
                 <Input type="text" id="lastName" placeholder="Bateman" value={lastName} onChange={(e)=>{setLastName(e.target.value)}}/>
             </Section>
             <Section>
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">Bio</Label>
                 <TextArea id="description" placeholder="    I live in the American Gardens Building on West 81st Street on the 11th floor. My name is Patrick Bateman. I’m 27 years old. I believe in taking care of myself, and a balanced diet and a rigorous exercise routine." value={description} onChange={(e)=>{setDescription(e.target.value)}}/>
             </Section>
             <Button type="submit">Submit</Button>
