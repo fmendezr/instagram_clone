@@ -1,6 +1,6 @@
 import { useContext, createContext, useEffect, useState } from "react";
 import  {auth}  from "../firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 
 const AuthContext = createContext();
 
@@ -27,6 +27,16 @@ export function AuthProvider({children}) {
         });
     }
 
+    const updatePhoneNumber = ( phoneNumber) => {
+        return updateProfile(auth.currentUser, {
+            phoneNumber
+        })
+    }
+
+    const sendVerificationEmail = () => {
+        return sendEmailVerification(auth.currentUser);
+    }
+
     useEffect(() => {
         const unsuscribe = auth.onAuthStateChanged(user => {
             setCurrentUser(user);
@@ -40,7 +50,9 @@ export function AuthProvider({children}) {
         currentUser,
         signUp,
         logIn,
-        changeDisplayName
+        changeDisplayName,
+        updatePhoneNumber,
+        sendVerificationEmail
     }
 
     return(
