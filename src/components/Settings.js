@@ -70,7 +70,7 @@ export default function Settings (props) {
                     <Button name="profile" onClick={handleClick}>Edit Profile</Button>
                     <Button name="account" onClick={handleClick}>Edit Account</Button>
                 </Navbar> 
-                <Form onSubmit={handleAccountSubmit}>
+                <Form>
                     <p>{currentUser.displayName}</p>
                     <Section>
                         <Label>Email</Label>
@@ -96,6 +96,11 @@ export default function Settings (props) {
             <Button name="profile" onClick={handleClick}>Edit Profile</Button>
             <Button name="account" onClick={handleClick}>Edit Account</Button>
         </Navbar>
+            <FormContainer>
+                <Form>
+        
+                </Form>
+            </FormContainer>
             <Form onSubmit={handleProfileSubmit}>
                 <Section>
                     <Label htmlFor="username">Username</Label>
@@ -129,6 +134,9 @@ const Navbar = styled.div`
 `
 
 const Button = styled.button`
+`
+
+const FormContainer = styled.div`
 `
 
 const Form = styled.form`
